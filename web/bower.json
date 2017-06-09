@@ -1,0 +1,28 @@
+{
+  "name": "Facebook Marketing",
+  "homepage": "fbbiz.dev",
+  "authors": [
+    "Viettut <giangyenbai@gmail.com>"
+  ],
+  "description": "Help facebookers manage their fan pages and profiles",
+  "main": "app.js",
+  "keywords": [
+    "facebook",
+    "marketing"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "fontawesome#^4.7.0",
+    "jquery": "^3.2.1",
+    "fastclick": "^1.0.6",
+    "nprogress": "^0.2.0"
+  }
+}

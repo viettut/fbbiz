@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'global' %}
+{% block controller %}ng-controller="TutorialController"{% endblock %}
+{% block main %}
+    <section class="page-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="{{ path('home_page') }}">Home</a></li>
+                        <li class="active"><a href="{{ path('tutorial_index') }}">{{ 'header.tutorial' | trans }}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>{{ 'tutorial.create' | trans }}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-horizontal" role="form" name="createGuide">
+                    <div class="alert alert-danger alert-dismissable" ng-if="showError">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{ 'tutorial.create_form.error' | trans }}
+                    </div>
+                    <div class="form-group">
+                        <label for="title">{{ 'tutorial.create_form.title' | trans }}</label>
+                        <input type="text" value="" class="form-control" name="title" id="title" ng-model="title" required>
+                    </div>
+                    <div class="form-group">
+                        <tags-input ng-model="selectedTags" on-tag-added="addTag($tag)">
+                            <auto-complete
+                                    source="filterTags($query)"
+                                    min-length="1"
+                                    select-first-match="false">
+                            </auto-complete>
+                        </tags-input>
+                    </div>
+                    <div class="form-group">
+                        <label for="video">Link video</label>
+                        <input type="url" value="" class="form-control" name="video" id="title" ng-model="video" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="tabs">
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a aria-expanded="false" href="#edit" data-toggle="tab"><i class="fa fa-star"></i>{{ 'tutorial.create_form.edit_tab' | trans }}</a>
+                                </li>
+                                <li>
+                                    <a aria-expanded="true" href="#preview" data-toggle="tab">{{ 'tutorial.create_form.preview_tab' | trans }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div id="edit" class="tab-pane active">
+                                <label for="content">{{ 'tutorial.create_form.content' | trans }}</label>
+                                <textarea
+                                        ng-model="content"
+                                        name="content"
+                                        markdown-editor="{'iconlibrary': 'fa', addExtraButtons: true, resize: 'vertical', hiddenButtons : ['cmdPreview']}"
+                                        rows="15">
+                                </textarea>
+                            </div>
+                            <div id="preview" class="tab-pane">
+                                <div marked="content" class="markdown padding20"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button ladda-button="laddaLoading" data-style="slide-right" ng-click="create()" class="btn ladda-button btn-primary border-radius5">{{ 'tutorial.create_form.submit' | trans }}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block custom %}
+    <script src="{{ asset('bundles/viettutweb/js/prism.js') }}"></script>
+    <script src="{{ asset('bundles/viettutweb/js/controller/tutorial.js') }}"></script>
+{% endblock %}
